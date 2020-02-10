@@ -27,14 +27,12 @@ namespace XamarinTV.ViewModels
         public SettingsViewModel SettingsViewModel => _settingsViewModel.Value;
         public VideoDetailViewModel VideoDetailViewModel => _videoDetailViewModel.Value;
 
-        TwoPaneViewTallModeConfiguration _tallModeConfiguration;
-        TwoPaneViewWideModeConfiguration _wideModeConfiguration;
         TwoPaneViewMode _twoPaneViewMode;
-        double _minWideModeWidth;
-        double _minTallModeHeight;
-        private GridLength _pane1Length;
-        private GridLength _pane2Length;
         bool _settingsActive = false;
+        private bool spannedWithVideo;
+        private bool notSpannedWithVideo;
+        private bool spannedWithoutVideo;
+        private bool notSpannedWithoutVideo;
 
         public Command<Video> PlayVideoCommand { get; }
         public Command OpenSettingWindowCommand { get; }
@@ -78,18 +76,6 @@ namespace XamarinTV.ViewModels
             }
         }
 
-        public TwoPaneViewTallModeConfiguration TallModeConfiguration
-        {
-            get => _tallModeConfiguration;
-            set => SetProperty(ref _tallModeConfiguration, value);
-        }
-
-        public TwoPaneViewWideModeConfiguration WideModeConfiguration
-        {
-            get => _wideModeConfiguration;
-            set => SetProperty(ref _wideModeConfiguration, value);
-        }
-
         public TwoPaneViewMode TwoPaneViewMode
         {
             get => _twoPaneViewMode;
@@ -102,82 +88,37 @@ namespace XamarinTV.ViewModels
             }
         }
 
-        public double MinWideModeWidth
-        {
-            get => _minWideModeWidth;
-            set => SetProperty(ref _minWideModeWidth, value);
-        }
-
-        public double MinTallModeHeight
-        {
-            get => _minTallModeHeight;
-            set => SetProperty(ref _minTallModeHeight, value);
-        }
-
-        public GridLength Pane1Length
-        {
-            get => _pane1Length;
-            set => SetProperty(ref _pane1Length, value);
-        }
-
-        public GridLength Pane2Length
-        {
-            get => _pane2Length;
-            set => SetProperty(ref _pane2Length, value);
-        }
-
         public bool DeviceIsSpanned => DualScreenInfo.Current.SpanMode != TwoPaneViewMode.SinglePane;
+
+        public bool SpannedWithVideo { get => spannedWithVideo; set => SetProperty(ref spannedWithVideo, value); }
+        public bool NotSpannedWithVideo { get => notSpannedWithVideo; set => SetProperty(ref notSpannedWithVideo, value); }
+        public bool SpannedWithoutVideo { get => spannedWithoutVideo; set => SetProperty(ref spannedWithoutVideo, value); }
+        public bool NotSpannedWithoutVideo { get => notSpannedWithoutVideo; set => SetProperty(ref notSpannedWithoutVideo, value); }
 
         public void UpdateLayouts()
         {
+            SpannedWithVideo = VideoPlayerViewModel.Video != null && DeviceIsSpanned;
+            NotSpannedWithVideo = VideoPlayerViewModel.Video != null && !DeviceIsSpanned;
+            SpannedWithoutVideo = VideoPlayerViewModel.Video == null && DeviceIsSpanned;
+            NotSpannedWithoutVideo = VideoPlayerViewModel.Video == null && !DeviceIsSpanned;
+
             if (VideoPlayerViewModel.Video != null)
             {
-                if(Device.RuntimePlatform == Device.UWP)
-                    MinTallModeHeight = 800;
-                else
-                    MinTallModeHeight = 600;
-
-                MinWideModeWidth = 4000;
-                Pane1Length = GridLength.Auto;
-                Pane2Length = GridLength.Star;
-
-                if(_settingsActive)
+                if (_settingsActive)
                     Pane1 = SettingsViewModel;
                 else
                     Pane1 = VideoPlayerViewModel;
 
                 Pane2 = VideoDetailViewModel;
-                TallModeConfiguration = TwoPaneViewTallModeConfiguration.TopBottom;
-                
-                if (!DeviceIsSpanned)
-                    WideModeConfiguration = TwoPaneViewWideModeConfiguration.SinglePane;
-                else
-                    WideModeConfiguration = TwoPaneViewWideModeConfiguration.LeftRight;
             }
             else
             {
-                Pane1Length = new GridLength(2, GridUnitType.Star);
-                Pane2Length = new GridLength(3, GridUnitType.Star);
-                MinTallModeHeight = 0;
-                MinWideModeWidth = 4000;
-
                 if (_settingsActive)
                     Pane1 = SettingsViewModel;
                 else
                     Pane1 = BrowseVideosViewModel;
 
                 Pane2 = SearchVideosViewModel;
-
-                if (!DeviceIsSpanned)
-                {
-                    TallModeConfiguration = TwoPaneViewTallModeConfiguration.SinglePane;
-                    WideModeConfiguration = TwoPaneViewWideModeConfiguration.SinglePane;
-                }
-                else
-                {
-                    TallModeConfiguration = TwoPaneViewTallModeConfiguration.TopBottom;
-                    WideModeConfiguration = TwoPaneViewWideModeConfiguration.LeftRight;
-                }
             }
         }
 

@@ -9,17 +9,62 @@
     mc:Ignorable="d"
     x:Class="XamarinTV.Views.MainPage"
     Visual="Material">
-    <!--Xamarin.Forms TwoPaneView that sizes and positions content in
-        the available space, either side-by-side or top-bottom-->
     <dualScreen:TwoPaneView
         x:Name="twoPaneView"
-        Pane1Length="{Binding Pane1Length}"
-        Pane2Length="{Binding Pane2Length}"
-        MinTallModeHeight="{Binding MinTallModeHeight}"
-        MinWideModeWidth="{Binding MinWideModeWidth}"        
-        Mode="{Binding TwoPaneViewMode, Mode=OneWayToSource}"
-        TallModeConfiguration="{Binding TallModeConfiguration}"
-        WideModeConfiguration="{Binding WideModeConfiguration}">
+        MinWideModeWidth="4000"        
+        Mode="{Binding TwoPaneViewMode, Mode=OneWayToSource}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="SpannedWithVideo">
+                    <VisualState.StateTriggers>
+                        <StateTrigger IsActive="{Binding SpannedWithVideo}"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Property="MinTallModeHeight" Value="{OnPlatform Default=600, UWP=800}" />
+                        <Setter Property="Pane1Length" Value="Auto" />
+                        <Setter Property="Pane2Length" Value="*" />
+                        <Setter Property="TallModeConfiguration" Value="TopBottom" />
+                        <Setter Property="WideModeConfiguration" Value="LeftRight" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="NotSpannedWithVideo">
+                    <VisualState.StateTriggers>
+                        <StateTrigger IsActive="{Binding NotSpannedWithVideo}"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Property="MinTallModeHeight" Value="{OnPlatform Default=600, UWP=800}" />
+                        <Setter Property="Pane1Length" Value="Auto" />
+                        <Setter Property="Pane2Length" Value="*" />
+                        <Setter Property="TallModeConfiguration" Value="TopBottom" />
+                        <Setter Property="WideModeConfiguration" Value="SinglePane" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="SpannedWithoutVideo">
+                    <VisualState.StateTriggers>
+                        <StateTrigger IsActive="{Binding SpannedWithoutVideo}"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Property="MinTallModeHeight" Value="0" />
+                        <Setter Property="Pane1Length" Value="2*" />
+                        <Setter Property="Pane2Length" Value="3*" />
+                        <Setter Property="TallModeConfiguration" Value="TopBottom" />
+                        <Setter Property="WideModeConfiguration" Value="LeftRight" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="NotSpannedWithoutVideo">
+                    <VisualState.StateTriggers>
+                        <StateTrigger IsActive="{Binding NotSpannedWithoutVideo}"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Property="MinTallModeHeight" Value="0" />
+                        <Setter Property="Pane1Length" Value="2*" />
+                        <Setter Property="Pane2Length" Value="3*" />
+                        <Setter Property="TallModeConfiguration" Value="SinglePane" />
+                        <Setter Property="WideModeConfiguration" Value="SinglePane" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <!--Pane 1-->
         <dualScreen:TwoPaneView.Pane1>
             <local:AnimationView
