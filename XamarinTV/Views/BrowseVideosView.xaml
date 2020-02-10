@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
+    xmlns:tabs="clr-namespace:Sharpnado.Presentation.Forms.CustomViews.Tabs;assembly=Sharpnado.Presentation.Forms"
+    xmlns:views="clr-namespace:XamarinTV.Views"
+    x:Class="XamarinTV.Views.BrowseVideosView"
+    BackgroundColor="{DynamicResource BackgroundColor}">
+    <ContentView.Resources>
+        <ResourceDictionary>
+
+            <Style TargetType="tabs:UnderlinedTabItem">
+                <Setter Property="FontFamily" Value="{StaticResource PoppinsSemiBold}" />
+                <Setter Property="UnselectedLabelColor" Value="LightGray" />
+                <Setter Property="SelectedTabColor" Value="{StaticResource WhiteColor}" />
+                <Setter Property="UnderlineAllTab" Value="True" />
+                <Setter Property="Margin" Value="12, 0" />
+            </Style>
+
+            <Style x:Key="SettingsButtonStyle" TargetType="ImageButton">
+                <Setter Property="BackgroundColor" Value="{StaticResource BlackColor}" />
+                <Setter Property="Margin" Value="6, 8" />
+            </Style>
+
+            <Style x:Key="SettingsImageStyle" TargetType="Image">
+                <Setter Property="HorizontalOptions" Value="End" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="Margin" Value="6, 8" />
+            </Style>
+
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid
+            RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="{StaticResource TopBarHeight}" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <!-- TOP VIDEOS -->
+            <ContentView
+                Grid.Row="0"
+                Content="{Binding TopViewModel, Converter={StaticResource ViewModelToViewConverter}}" />
+            <!-- BROWSE VIDEOS -->
+            <Grid
+                Grid.Row="1"
+                BackgroundColor="{StaticResource BlackColor}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <tabs:TabHostView
+                    Grid.Column="0"
+                    BackgroundColor="{StaticResource BlackColor}"
+                    ShadowType="Bottom"
+                    TabType="Scrollable"
+                    SelectedIndex="{Binding Source={x:Reference Switcher}, Path=SelectedIndex, Mode=TwoWay}">
+                    <tabs:TabHostView.Tabs>
+                        <tabs:UnderlinedTabItem
+                            Label="Featured"/>
+                        <tabs:UnderlinedTabItem
+                            Label="Keep Watching"/>
+                        <tabs:UnderlinedTabItem
+                            Label="Trending"/>
+                    </tabs:TabHostView.Tabs>
+                </tabs:TabHostView>
+                <ImageButton
+                    Grid.Column="1"
+                    Command="{Binding SettingsCommand}"
+                    Style="{StaticResource SettingsButtonStyle}"
+                    Source="{StaticResource IconCog}">
+                    <ImageButton.IsVisible>
+                        <OnPlatform x:TypeArguments="x:Boolean">
+                            <On Platform="Android, iOS" Value="True" />
+                            <On Platform="UWP" Value="False" />
+                        </OnPlatform>
+                    </ImageButton.IsVisible>
+                </ImageButton>
+                <Image
+                    Source="settings.png"
+                    Style="{StaticResource SettingsImageStyle}">
+                    <Image.IsVisible>
+                        <OnPlatform x:TypeArguments="x:Boolean">
+                            <On Platform="Android, iOS" Value="False" />
+                            <On Platform="UWP" Value="True" />
+                        </OnPlatform>
+                    </Image.IsVisible>
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding SettingsCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </Grid>
+            <tabs:ViewSwitcher
+                Grid.Row="2"
+                x:Name="Switcher"
+                Animate="True"
+                SelectedIndex="{Binding SelectedViewModelIndex, Mode=TwoWay}">
+                <views:FeaturedVideosView />
+                <views:KeepWatchingView />
+                <views:TrendingView />
+            </tabs:ViewSwitcher>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

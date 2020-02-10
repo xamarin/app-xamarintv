@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="XamarinTV.Views.VideoPlayerView"
+    BackgroundColor="{StaticResource BlackColor}">
+    <ContentView.Resources>
+        <ResourceDictionary>
+
+            <Style
+                x:Key="HeaderStyle"
+                TargetType="Grid">
+                <Setter
+                    Property="HeightRequest"
+                    Value="44" />
+                <Setter
+                    Property="VerticalOptions"
+                    Value="Start" />
+            </Style>
+
+            <Style
+                x:Key="TitleStyle"
+                TargetType="Label">
+                <Setter
+                    Property="FontFamily"
+                    Value="{StaticResource PoppinsRegular}" />
+                <Setter
+                    Property="FontSize"
+                    Value="{StaticResource MidMediumSize}" />
+                <Setter
+                    Property="TextColor"
+                    Value="White" />
+                <Setter
+                    Property="LineBreakMode"
+                    Value="TailTruncation" />
+                <Setter
+                    Property="MaxLines"
+                    Value="1" />
+                <Setter
+                    Property="VerticalOptions"
+                    Value="Start" />
+                <Setter
+                    Property="HorizontalOptions"
+                    Value="Start"/>
+                <Setter
+                    Property="Margin"
+                    Value="12, 10" />
+            </Style>
+
+            <Style
+                x:Key="VideoPlayerStyle"
+                TargetType="MediaElement">
+                <Setter
+                    Property="BackgroundColor"
+                    Value="{DynamicResource BlackColor}" />
+                <Setter
+                    Property="HeightRequest"
+                    Value="300" />
+                <Setter
+                    Property="AutoPlay"
+                    Value="True" />
+                <Setter
+                    Property="ShowsPlaybackControls"
+                    Value="False" />
+                <Setter
+                    Property="IsLooping"
+                    Value="False" />
+                <Setter
+                    Property="VerticalOptions"
+                    Value="FillAndExpand" />
+                <Setter
+                    Property="Aspect"
+                    Value="AspectFit" />
+            </Style>
+
+            <Style
+                x:Key="CloseButtonStyle"
+                TargetType="ImageButton">
+                <Setter
+                    Property="BackgroundColor"
+                    Value="Transparent" />
+                <Setter
+                    Property="VerticalOptions"
+                    Value="Start" />
+                <Setter
+                    Property="HorizontalOptions"
+                    Value="End"/>
+                <Setter
+                    Property="Margin"
+                    Value="0,10,10,0" />
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Frame
+            HeightRequest="300"
+            BackgroundColor="{StaticResource BlackColor}"
+            CornerRadius="0">
+            <Grid
+                RowSpacing="0">
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnTapGestureRecognizerTapped"/>
+                </Grid.GestureRecognizers>
+                <Grid.RowDefinitions>
+                    <RowDefinition
+                        Height="*" />
+                    <RowDefinition
+                        Height="Auto" />
+                    <RowDefinition
+                        Height="*" />
+                </Grid.RowDefinitions>
+                <MediaElement
+                    Grid.Row="1"
+                    x:Name="VideoPlayer"
+                    Source="{Binding VideoSource, Converter={StaticResource VideoSourceConverter}}"
+                    StateRequested="MediaElement_StateRequested"
+                    MediaOpened="VideoPlayer_MediaOpened"
+                    Volume="{Binding Volume}"
+                    Style="{StaticResource VideoPlayerStyle}"/>
+                <Grid x:Name="PlayerHUD"
+                    Grid.Row="0"
+                    Grid.RowSpan="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <BoxView BackgroundColor="Black" Opacity="0.6"/>
+                    <ImageButton x:Name="PlayPauseToggle" 
+                         Source="{StaticResource PauseIcon}" 
+                         Clicked="PlayPauseToggle_Clicked"
+                         BackgroundColor="Transparent"
+                         HorizontalOptions="Center" 
+                         VerticalOptions="Center">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup Name="PlaybackStates">
+                                <VisualState Name="paused">
+                                    <VisualState.Setters>
+                                        <Setter Property="Source" Value="{StaticResource PlayIcon}"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState Name="playing">
+                                    <VisualState.Setters>
+                                        <Setter Property="Source" Value="{StaticResource PauseIcon}"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </ImageButton>
+                    <Label x:Name="TimeAndDuration" Text="Loading..."
+                       TextColor="White" 
+                       FontSize="14"
+                       Margin="15"
+                       VerticalOptions="End"
+                       HorizontalOptions="End"/>
+
+                    <Label
+                        Text="{Binding Video.Title}"
+                        Style="{StaticResource TitleStyle}" />
+                    <ImageButton
+                        Command="{Binding CloseCommand}"
+                        Source="{StaticResource IconWindowClose}"
+                        Style="{StaticResource CloseButtonStyle}" />
+                </Grid>
+            </Grid>
+        </Frame>
+    </ContentView.Content>
+</ContentView>

@@ -1,0 +1,67 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' " />
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'MultiDebug|AnyCPU' ">
+    <IntermediateOutputPath>obj\MultiDebug</IntermediateOutputPath>
+    <DebugType></DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\MultiDebug</OutputPath>
+    <DefineConstants></DefineConstants>
+    <NoWarn></NoWarn>
+    <NoStdLib>false</NoStdLib>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms.Visual.Material">
+      <Version>4.5.0.748-pre4</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms">
+      <Version>4.5.0.748-pre4</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms.DualScreen">
+      <Version>4.5.0.748-pre4</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
+    <PackageReference Include="Xamanimation" Version="1.3.0" />
+    <PackageReference Include="Xamarin.Forms.PancakeView" Version="1.3.7" />
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.4.11.982" />
+    <PackageReference Include="Sharpnado.Presentation.Forms" Version="1.4.0" />
+    <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.2-preview.21" />
+    <PackageReference Include="Xamarin.Forms.StateSquid" Version="1.1.3" />
+  </ItemGroup>
+    
+  <ItemGroup>
+    <Folder Include="Styles\" />
+    <Folder Include="Events\" />
+    <Folder Include="Effects\" />
+  </ItemGroup>
+    
+  <ItemGroup>
+    <Compile Remove="ViewModels\VideoPlayerView.xaml.cs" />
+  </ItemGroup>
+    
+  <ItemGroup>
+    <Compile Update="Views\VideoDetailView.xaml.cs">
+      <DependentUpon>VideoDetailView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+    
+  <ItemGroup>
+    <EmbeddedResource Update="Views\AnimationView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\MainPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

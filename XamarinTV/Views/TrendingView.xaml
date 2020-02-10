@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:XamarinTV.ViewModels"
+    xmlns:templates="clr-namespace:XamarinTV.Views.Templates" 
+    x:Class="XamarinTV.Views.TrendingView"
+    BackgroundColor="{DynamicResource BackgroundColor}">
+    <ContentView.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="TrendingCollectionStyle" TargetType="FlexLayout">
+                <Setter Property="Wrap" Value="Wrap" />
+                <Setter Property="Direction" Value="Row" />
+            </Style>
+            
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.BindingContext>
+        <viewmodels:TrendingViewModel />
+    </ContentView.BindingContext>
+    <ContentView.Content>
+        <Grid Margin="12">
+            <ScrollView>
+                <FlexLayout
+                    BindableLayout.ItemsSource="{Binding Videos}"
+                    IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}"
+                    Style="{StaticResource TrendingCollectionStyle}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <templates:VideoItemTemplate
+                                FlexLayout.Basis="33%" />
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </FlexLayout>
+            </ScrollView>
+            <ActivityIndicator
+                Color="{DynamicResource TextPrimaryColor}"
+                IsVisible="{Binding IsBusy}"/>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:XamarinTV.ViewModels"
+    xmlns:templates="clr-namespace:XamarinTV.Views.Templates"
+    xmlns:state="clr-namespace:Xamarin.Forms.StateSquid;assembly=Xamarin.Forms.StateSquid"
+    x:Class="XamarinTV.Views.FeaturedVideosView"
+    BackgroundColor="{DynamicResource BackgroundColor}">
+    <ContentView.Resources>
+        <ResourceDictionary>
+
+            <Style
+                x:Key="GroupTitleStyle"
+                TargetType="Label">
+                <Setter
+                    Property="FontFamily"
+                    Value="{StaticResource PoppinsMedium}" />
+                <Setter
+                    Property="FontSize"
+                    Value="{StaticResource MidMediumSize}" />
+                <Setter
+                    Property="TextColor"
+                    Value="{DynamicResource TextPrimaryColor}" />
+            </Style>
+
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.BindingContext>
+        <viewmodels:FeaturedVideosViewModel />
+    </ContentView.BindingContext>
+    <ContentView.Content>
+        <Grid
+            state:StateLayout.CurrentState="{Binding CurrentState}">
+            <state:StateLayout.StateViews>
+                <state:StateView
+                    StateKey="Loading"
+                    RepeatCount="3">
+                    <state:StateView.RepeatTemplate>
+                        <DataTemplate>
+                            <Grid
+                                Opacity="0.6"
+                                Padding="20">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition
+                                        Height="140" />
+                                    <RowDefinition
+                                        Height="140" />
+                                    <RowDefinition
+                                        Height="140" />
+                                </Grid.RowDefinitions>
+                                <Grid
+                                    Grid.Row="0"
+                                    Margin="6">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition
+                                            Height="30" />
+                                        <RowDefinition
+                                            Height="90" />
+                                    </Grid.RowDefinitions>
+                                    <state:SkeletonView
+                                        CornerRadius="6"
+                                        WidthRequest="80"
+                                        HeightRequest="20"
+                                        VerticalOptions="Start"
+                                        BackgroundColor="#cccccc"
+                                        HorizontalOptions="Fill" />
+                                    <StackLayout
+                                        Orientation="Horizontal"
+                                        Grid.Row="1">
+                                        <state:SkeletonView
+                                            CornerRadius="6"
+                                            HeightRequest="90"
+                                            WidthRequest="145"
+                                            BackgroundColor="#cccccc"
+                                            HorizontalOptions="Fill" />
+                                        <state:SkeletonView
+                                            CornerRadius="6"
+                                            HeightRequest="90"
+                                            WidthRequest="145"
+                                            BackgroundColor="#cccccc"
+                                            HorizontalOptions="Fill" />
+                                        <state:SkeletonView
+                                            CornerRadius="6"
+                                            HeightRequest="90"
+                                            WidthRequest="145"
+                                            BackgroundColor="#cccccc"
+                                            HorizontalOptions="Fill" />
+                                    </StackLayout>
+                                </Grid>
+                                <Grid
+                                    Grid.Row="1"
+                                    Margin="6">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition
+                                            Height="30" />
+                                        <RowDefinition
+                                            Height="90" />
+                                    </Grid.RowDefinitions>
+                                    <state:SkeletonView
+                                        CornerRadius="6"
+                                        WidthRequest="80"
+                                        HeightRequest="20"
+                                        VerticalOptions="Start"
+                                        BackgroundColor="#cccccc"
+                                        HorizontalOptions="Fill" />
+                                    <StackLayout
+                                        Orientation="Horizontal"
+                                        Grid.Row="1">
+                                        <state:SkeletonView
+                                            CornerRadius="6"
+                                            HeightRequest="90"
+                                            WidthRequest="145"
+                                            BackgroundColor="#cccccc"
+                                            HorizontalOptions="Fill" />
+                                        <state:SkeletonView
+                                            CornerRadius="6"
+                                            HeightRequest="90"
+                                            WidthRequest="145"
+                                            BackgroundColor="#cccccc"
+                                            HorizontalOptions="Fill" />
+                                        <state:SkeletonView
+                                            CornerRadius="6"
+                                            HeightRequest="90"
+                                            WidthRequest="145"
+                                            BackgroundColor="#cccccc"
+                                            HorizontalOptions="Fill" />
+                                        <state:SkeletonView
+                                            CornerRadius="6"
+                                            HeightRequest="90"
+                                            WidthRequest="145"
+                                            BackgroundColor="#cccccc"
+                                            HorizontalOptions="Fill" />
+                                        <state:SkeletonView
+                                            CornerRadius="6"
+                                            HeightRequest="90"
+                                            WidthRequest="145"
+                                            BackgroundColor="#cccccc"
+                                            HorizontalOptions="Fill" />
+                                    </StackLayout>
+                                </Grid>
+                                <Grid
+                                    Grid.Row="2"
+                                    Margin="6">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition
+                                            Height="30" />
+                                        <RowDefinition
+                                            Height="90" />
+                                    </Grid.RowDefinitions>
+                                    <state:SkeletonView
+                                        CornerRadius="6"
+                                        WidthRequest="80"
+                                        HeightRequest="20"
+                                        VerticalOptions="Start"
+                                        BackgroundColor="#cccccc"
+                                        HorizontalOptions="Fill" />
+                                    <StackLayout
+                                        Orientation="Horizontal"
+                                        Grid.Row="1">
+                                        <state:SkeletonView
+                                            CornerRadius="6"
+                                            HeightRequest="90"
+                                            WidthRequest="145"
+                                            BackgroundColor="#cccccc"
+                                            HorizontalOptions="Fill" />
+                                        <state:SkeletonView
+                                            CornerRadius="6"
+                                            HeightRequest="90"
+                                            WidthRequest="145"
+                                            BackgroundColor="#cccccc"
+                                            HorizontalOptions="Fill" />
+                                        <state:SkeletonView
+                                            CornerRadius="6"
+                                            HeightRequest="90"
+                                            WidthRequest="145"
+                                            BackgroundColor="#cccccc"
+                                            HorizontalOptions="Fill" />
+                                        <state:SkeletonView
+                                            CornerRadius="6"
+                                            HeightRequest="90"
+                                            WidthRequest="145"
+                                            BackgroundColor="#cccccc"
+                                            HorizontalOptions="Fill" />
+                                        <state:SkeletonView
+                                            CornerRadius="6"
+                                            HeightRequest="90"
+                                            WidthRequest="145"
+                                            BackgroundColor="#cccccc"
+                                            HorizontalOptions="Fill" />
+                                    </StackLayout>
+                                </Grid>
+                            </Grid>
+                        </DataTemplate>
+                    </state:StateView.RepeatTemplate>
+                </state:StateView>
+            </state:StateLayout.StateViews>
+            <CollectionView
+                ItemsSource="{Binding Videos}"
+                ItemsLayout="VerticalList"
+                Margin="12">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid
+                            Margin="6">
+                            <Grid.RowDefinitions>
+                                <RowDefinition
+                                    Height="Auto" />
+                                <RowDefinition
+                                    Height="120" />
+                            </Grid.RowDefinitions>
+                            <Label
+                                Text="{Binding Title}"
+                                Style="{StaticResource GroupTitleStyle}" />
+                            <CollectionView
+                                Grid.Row="1"
+                                HeightRequest="120"
+                                ItemsSource="{Binding}"
+                                ItemsLayout="HorizontalList"
+                                HorizontalScrollBarVisibility="Never"
+                                VerticalScrollBarVisibility="Never">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <templates:VideoItemTemplate />
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pancakeview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    x:Class="XamarinTV.Views.Templates.RecentSearchItemTemplate">
+    <ContentView.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="RecentSearchStyle" TargetType="pancakeview:PancakeView">
+                <Setter Property="BackgroundColor" Value="{DynamicResource RecentSearchBackgroundColor}" />
+                <Setter Property="CornerRadius" Value="24" />
+                <Setter Property="HeightRequest" Value="30" />
+                <Setter Property="MinimumWidthRequest" Value="120" />
+                <Setter Property="Padding" Value="2, 0"/>
+                <Setter Property="Margin" Value="6, 0"/>
+            </Style>
+            
+            <Style x:Key="RecentSearchTextStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource PoppinsMedium}"/>
+                <Setter Property="TextColor" Value="{DynamicResource TextSecondaryColor}"/>
+                <Setter Property="FontSize" Value="{StaticResource LittleSize}" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <pancakeview:PancakeView
+            Style="{StaticResource RecentSearchStyle}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="6" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="6" />
+                </Grid.ColumnDefinitions>
+                <Label
+                    Grid.Column="1"
+                    Text="{Binding}" 
+                    Style="{StaticResource RecentSearchTextStyle}"/>
+            </Grid>
+        </pancakeview:PancakeView>
+    </ContentView.Content>
+</ContentView>

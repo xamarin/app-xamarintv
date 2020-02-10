@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:XamarinTV.ViewModels"
+    xmlns:templates="clr-namespace:XamarinTV.Views.Templates" 
+    x:Class="XamarinTV.Views.SearchVideosView"
+    BackgroundColor="{DynamicResource BackgroundColor}">
+    <ContentView.Resources>
+        <ResourceDictionary>
+
+            <DataTemplate x:Key="RecentSearchItemTemplate">
+                <templates:RecentSearchItemTemplate />
+            </DataTemplate>
+
+            <Style x:Key="VideosSearchBarStyle" TargetType="Entry">
+                <Setter Property="FontFamily" Value="{StaticResource PoppinsLight}" />
+                <Setter Property="TextColor" Value="{DynamicResource TextPrimaryColor}" />
+                <Setter Property="PlaceholderColor" Value="{DynamicResource TextPrimaryColor}" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource RecentSearchBackgroundColor}" />
+            </Style>
+
+            <Style x:Key="SectionTitleStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource PoppinsMedium}" />
+                <Setter Property="FontSize" Value="{StaticResource MidMediumSize}" />
+                <Setter Property="TextColor" Value="{DynamicResource TextPrimaryColor}" />
+                <Setter Property="Margin">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="Android, iOS" Value="0, 6, 0, 0" />
+                            <On Platform="UWP" Value="0, 6" />
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.BindingContext>
+        <viewmodels:SearchVideosViewModel />
+    </ContentView.BindingContext>
+    <ContentView.Content>
+        <Grid>
+            <Grid
+                IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}"
+                RowSpacing="0"
+                Padding="12">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <!--
+                <Image
+                    Grid.Column="0"
+                    Aspect="AspectFit"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Center"
+                    Margin="0,0,12,0"
+                    Source="xamtv.png"/>
+                -->
+                <Entry
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Placeholder="Find Xamarin videos, speakers..."
+                    Visual="Material"
+                    Style="{StaticResource VideosSearchBarStyle}"/>
+                <!-- LAST SEARCHED -->
+                <Grid
+                    Grid.Row="1"
+                    Grid.ColumnSpan="2"
+                    Margin="0, 12, 0, 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Label
+                        Grid.Row="0"
+                        Text="Last searched"
+                        Style="{StaticResource SectionTitleStyle}"/>
+                    <ScrollView
+                        Grid.Row="1" 
+                        Orientation="Horizontal"
+                        HorizontalScrollBarVisibility="Never"
+                        VerticalScrollBarVisibility="Never">
+                        <StackLayout
+                            Orientation="Horizontal"
+                            BindableLayout.ItemsSource="{Binding RecentSearches}"
+                            BindableLayout.ItemTemplate="{StaticResource RecentSearchItemTemplate}"/>
+                    </ScrollView>
+                </Grid>
+                <!-- MOST SEARCHED -->
+                <Grid
+                    Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    Margin="0, 12, 0, 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Label
+                        Grid.Row="0"
+                        Text="Most searched"
+                        Style="{StaticResource SectionTitleStyle}"/>
+                    <CollectionView
+                        Grid.Row="1"
+                        ItemsSource="{Binding MostSearchedVideos}">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout
+                                Orientation="Vertical"
+                                HorizontalItemSpacing="12"
+                                VerticalItemSpacing="12"
+                                Span="2" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <templates:SearchVideoItemTemplate />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Grid>
+            </Grid>
+            <ActivityIndicator
+                Color="{DynamicResource TextPrimaryColor}"
+                IsVisible="{Binding IsBusy}"/>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

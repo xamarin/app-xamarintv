@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pancakeview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    x:Class="XamarinTV.Views.Templates.CommentItemTemplate">
+    <ContentView.Resources>
+        <ResourceDictionary>
+
+             <Style x:Key="AvatarBorderStyle" TargetType="pancakeview:PancakeView"> 
+                 <Setter Property="BorderColor" Value="{DynamicResource TextSecondaryColor}" />
+                 <Setter Property="BorderThickness" Value="1" />
+                 <Setter Property="CornerRadius" Value="60" />
+                <Setter Property="VerticalOptions">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="LayoutOptions">
+                            <On Platform="Android, iOS" Value="Center" />
+                            <On Platform="UWP" Value="Start" />
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+                 <Setter Property="HorizontalOptions" Value="Center" />
+                 <Setter Property="HeightRequest" Value="48" />
+                 <Setter Property="WidthRequest" Value="48" />
+                 <Setter Property="Margin" Value="0, 0, 6, 0" />
+            </Style>
+  
+            <Style x:Key="AvatarStyle" TargetType="Image"> 
+                <Setter Property="Aspect" Value="AspectFill" />
+            </Style>
+            
+            <Style x:Key="UsernameStyle" TargetType="Label"> 
+                <Setter Property="FontFamily" Value="{StaticResource PoppinsSemiBold}" />
+                <Setter Property="TextColor" Value="{DynamicResource TextPrimaryColor}" />
+                <Setter Property="FontSize" Value="{StaticResource LittleSize}" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+             <Style x:Key="DateStyle" TargetType="Label"> 
+                <Setter Property="FontFamily" Value="{StaticResource PoppinsLight}" />
+                <Setter Property="TextColor" Value="{DynamicResource TextSecondaryColor}" />
+                 <Setter Property="FontSize" Value="{StaticResource LittleSize}" />
+                 <Setter Property="HorizontalOptions" Value="End" />
+                <Setter Property="VerticalOptions" Value="Center" />
+             </Style>
+
+            <Style x:Key="CommentStyle" TargetType="Label"> 
+                <Setter Property="FontFamily" Value="{StaticResource PoppinsLight}" />
+                <Setter Property="TextColor" Value="{DynamicResource TextSecondaryColor}" />
+                <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
+            </Style>
+            
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid
+            RowSpacing="0"
+            Margin="0, 12, 0, 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <pancakeview:PancakeView
+                Grid.RowSpan="2"
+                Style="{StaticResource AvatarBorderStyle}">
+                <Image
+                    Source="{Binding Avatar}"
+                    Style="{StaticResource AvatarStyle}"/>
+            </pancakeview:PancakeView>
+            <Label
+                Grid.Column="1"
+                Text="{Binding Username}"
+                Style="{StaticResource UsernameStyle}"/>
+            <Label
+                Grid.Column="2"
+                Text="{Binding Date}"
+                Style="{StaticResource DateStyle}"/>
+            <Label
+                Grid.Row="1"
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Text="{Binding Comment}"
+                Style="{StaticResource CommentStyle}"/>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

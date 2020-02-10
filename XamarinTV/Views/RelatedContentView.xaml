@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:XamarinTV.ViewModels"
+    xmlns:templates="clr-namespace:XamarinTV.Views.Templates"
+    x:Class="XamarinTV.Views.RelatedContentView">
+    <ContentView.BindingContext>
+        <viewmodels:RelatedContentViewModel />
+    </ContentView.BindingContext>
+    <ContentView.Resources>
+        <ResourceDictionary>
+
+            <Style
+                x:Key="TitleStyle"
+                TargetType="Label">
+                <Setter
+                    Property="FontFamily"
+                    Value="{StaticResource PoppinsRegular}" />
+                <Setter
+                    Property="TextColor"
+                    Value="{DynamicResource TextSecondaryColor}" />
+                <Setter
+                    Property="FontSize"
+                    Value="{StaticResource MediumSize}" />
+            </Style>
+
+            <Style
+                x:Key="ViewsStyle"
+                TargetType="Label">
+                <Setter
+                    Property="FontFamily"
+                    Value="{StaticResource PoppinsRegular}" />
+                <Setter
+                    Property="TextColor"
+                    Value="{DynamicResource TextSecondaryColor}" />
+                <Setter
+                    Property="FontSize"
+                    Value="{StaticResource MediumSize}" />
+            </Style>
+
+            <Style
+                x:Key="DescriptionStyle"
+                TargetType="Label">
+                <Setter
+                    Property="FontFamily"
+                    Value="{StaticResource PoppinsLight}" />
+                <Setter
+                    Property="TextColor"
+                    Value="{DynamicResource TextSecondaryColor}" />
+                <Setter
+                    Property="FontSize"
+                    Value="{StaticResource MidMediumSize}" />
+            </Style>
+
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <ScrollView>
+            <Grid
+                Margin="12">
+                <Grid.RowDefinitions>
+                    <RowDefinition
+                        Height="Auto" />
+                    <RowDefinition
+                        Height="*" />
+                </Grid.RowDefinitions>
+                <StackLayout
+                    Spacing="2"
+                    Margin="0,0,0,12"
+                    BindingContext="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:VideoDetailViewModel}}}">
+                    <Label
+                        Style="{StaticResource TitleStyle}"
+                        Text="{Binding Title}" />
+                    <Label
+                        Style="{StaticResource ViewsStyle}"
+                        Text="{Binding ViewCount}" />
+                    <Label
+                        Style="{StaticResource DescriptionStyle}"
+                        TextType="Html"
+                        Text="{Binding Description}" />
+                </StackLayout>
+                <FlexLayout
+                    Grid.Row="1"
+                    Wrap="Wrap"
+                    Direction="Row"
+                    BindableLayout.ItemsSource="{Binding Videos}"
+                    IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <templates:VideoItemTemplate
+                                FlexLayout.Basis="33%" />
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </FlexLayout>
+                <ActivityIndicator
+                    Color="{DynamicResource TextPrimaryColor}"
+                    IsVisible="{Binding IsBusy}" />
+            </Grid>
+        </ScrollView>
+    </ContentView.Content>
+</ContentView>

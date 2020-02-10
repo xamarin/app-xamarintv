@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:forms="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+    xmlns:effects="clr-namespace:XamarinTV.Effects"
+    x:Class="XamarinTV.Views.NotesView">
+    <ContentView.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="ColorPickerLayoutStyle" TargetType="FlexLayout">
+                <Setter Property="Direction" Value="Row" />
+                <Setter Property="JustifyContent" Value="Start" />
+                <Setter Property="Wrap" Value="Wrap" />
+            </Style>
+
+            <Style x:Key="ColorStyle" TargetType="BoxView">
+                <Setter Property="CornerRadius" Value="13" />
+                <Setter Property="HeightRequest" Value="26" />
+                <Setter Property="WidthRequest" Value="26" />
+                <Setter Property="Margin" Value="4" />
+            </Style>
+
+            <Style x:Key="SelectedColorStyle" TargetType="BoxView">
+            <Setter Property="CornerRadius" Value="6" />
+                <Setter Property="HeightRequest" Value="12" />
+                <Setter Property="WidthRequest" Value="12" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="NotesButtonStyle" TargetType="Button">
+                <Setter Property="FontFamily" Value="{StaticResource PoppinsMedium}"/>
+                <Setter Property="BackgroundColor" Value="{DynamicResource BackgroundColor}"/>
+                <Setter Property="BorderColor" Value="{DynamicResource TextPrimaryColor}"/>
+                <Setter Property="TextColor" Value="{DynamicResource TextPrimaryColor}" />
+                <Setter Property="BorderRadius" Value="24"/>
+                <Setter Property="BorderWidth" Value="1"/>
+                <Setter Property="CornerRadius" Value="24"/>
+                <Setter Property="HeightRequest" Value="48"/>
+                <Setter Property="Margin" Value="6"/>
+            </Style>
+
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+            <Grid
+                Grid.Row="0"
+                BackgroundColor="{DynamicResource BackgroundColor}">
+                <Grid.Effects>
+                    <effects:TouchEffect
+                        Capture="True"
+                        TouchAction="OnTouchEffectAction" />
+                </Grid.Effects>
+                <forms:SKCanvasView
+                    x:Name="CanvasView"
+                    PaintSurface="OnCanvasViewPaintSurface" />
+            </Grid>
+            <Grid
+                Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <FlexLayout
+                    x:Name="ColorsLayout"
+
+                    Style="{StaticResource ColorPickerLayoutStyle}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Grid
+                                HeightRequest="26"
+                                WidthRequest="26">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Tapped="OnColorSourceTapped"/>
+                                </Grid.GestureRecognizers>
+                                <BoxView
+                                    Color="{Binding Color}"
+                                    Style="{StaticResource ColorStyle}"/>
+                                <BoxView
+                                    IsVisible="{Binding IsSelected}"
+                                    Color="{StaticResource WhiteColor}"
+                                    Style="{StaticResource SelectedColorStyle}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </FlexLayout>
+                    <Button
+                        Grid.Column="1"
+                        Text="Clear"
+                        Clicked="ClearButton_Clicked"
+                        Style="{StaticResource NotesButtonStyle}"/>
+                    <!--<Button
+                        Grid.Row="1"
+                        Text="Save" 
+                        Style="{StaticResource NotesButtonStyle}"/>-->
+                
+            </Grid>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

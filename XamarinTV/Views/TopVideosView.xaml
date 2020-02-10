@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:XamarinTV.ViewModels"
+    xmlns:templates="clr-namespace:XamarinTV.Views.Templates"
+    xmlns:behaviors="clr-namespace:XamarinTV.Behaviors"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    xmlns:xamanimation="clr-namespace:Xamanimation;assembly=Xamanimation"
+    x:Class="XamarinTV.Views.TopVideosView"
+    BackgroundColor="{DynamicResource BackgroundColor}">
+    <ContentView.Resources>
+        <ResourceDictionary>
+
+            <xamanimation:StoryBoard 
+                x:Key="TopVideosCarouselTranslationAnimation" 
+                Target="{x:Reference TopVideosCarousel}">
+                <xamanimation:TranslateToAnimation 
+                    TranslateY="0"
+                    Easing="CubicOut" 
+                    Duration="3000" />
+            </xamanimation:StoryBoard>
+
+            <Style TargetType="ffimageloading:CachedImage">
+                <Setter Property="Aspect" Value="AspectFill" />
+            </Style>
+
+            <Style TargetType="CarouselView">
+                <Setter Property="PeekAreaInsets" Value="0, 0, 200, 0" />
+            </Style>
+
+            <Style x:Key="TopVideosIndicatorStyle" TargetType="IndicatorView">
+                <Setter Property="IndicatorsShape" Value="Circle" />
+                <Setter Property="IndicatorColor" Value="{StaticResource WhiteColor}" />
+                <Setter Property="SelectedIndicatorColor" Value="{StaticResource BlackColor}" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="Margin" Value="0, 12" />
+            </Style>
+
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.BindingContext>
+        <viewmodels:TopVideosViewModel />
+    </ContentView.BindingContext>
+    <ContentView.Content>
+        <Grid IsClippedToBounds="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <ffimageloading:CachedImage
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                Source="{Binding Current.Video.Image}"
+                Scale="2">
+                <ffimageloading:CachedImage.Transformations>
+                    <transformations:BlurredTransformation
+                        Radius="100" />
+                </ffimageloading:CachedImage.Transformations>
+            </ffimageloading:CachedImage>
+            <Grid
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                BackgroundColor="{StaticResource BlackColor}"
+                Opacity="0.5"/>
+            <CarouselView
+                x:Name="TopVideosCarousel"
+                Grid.Row="0"
+                TranslationY="0"
+                Scrolled="OnScrolled"
+                ItemsSource="{Binding TopVideos}"
+                CurrentItem="{Binding Current, Mode=TwoWay}">
+                <CarouselView.ItemsLayout>
+                    <LinearItemsLayout
+                        Orientation="Horizontal"
+                        SnapPointsType="MandatorySingle"
+                        SnapPointsAlignment="Center"/>
+                </CarouselView.ItemsLayout>
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <templates:TopVideoItemTemplate />
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+            <IndicatorView
+                x:Name="TopVideosIndicator"
+                Grid.Row="1"
+                ItemsSourceBy="TopVideosCarousel"
+                Style="{StaticResource TopVideosIndicatorStyle}"/>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

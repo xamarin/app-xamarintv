@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pancakeview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:viewmodels="clr-namespace:XamarinTV.ViewModels"
+    x:Class="XamarinTV.Views.Templates.TopVideoItemTemplate">
+    <ContentView.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="TopVideoLayoutStyle" TargetType="pancakeview:PancakeView">
+                <Setter Property="CornerRadius" Value="24" />
+                <Setter Property="HasShadow" Value="True" />
+                <Setter Property="Margin" Value="0, 12, 0, 0" />
+            </Style>
+
+            <Style x:Key="BackgroundImageStyle" TargetType="Image">
+                <Setter Property="Aspect" Value="AspectFill" />
+                <Setter Property="Opacity" Value="0.75" />
+            </Style>
+
+            <Style x:Key="PlayIconStyle" TargetType="Image">
+                <Setter Property="Aspect" Value="AspectFit" />
+                <Setter Property="InputTransparent" Value="True" />
+                <Setter Property="HeightRequest" Value="60" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="TopVideoTextStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource PoppinsLight}" />
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
+                <Setter Property="FontSize">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android, iOS" Value="{StaticResource MediumSize}" />
+                            <On Platform="UWP" Value="{StaticResource ExtraBigSize}" />
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="VerticalOptions" Value="End" />
+                <Setter Property="Margin" Value="12, 24, 12, 6" />
+            </Style>
+
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid>
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer
+                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:TopVideosViewModel}}, Path=VideoPlayerCommand}"/>
+            </Grid.GestureRecognizers>
+            <pancakeview:PancakeView
+                Style="{StaticResource TopVideoLayoutStyle}"
+                Scale="{Binding Scale}">
+                <Grid>
+                    <Image
+                        Source="{Binding Video.Image}"
+                        Style="{StaticResource BackgroundImageStyle}"/>
+                    <Grid
+                        BackgroundColor="{StaticResource BlackColor}"
+                        Opacity="0.5"/>
+                    <Image
+                        Source="play"
+                        Style="{StaticResource PlayIconStyle}"/>
+                    <Label
+                        Text="{Binding Video.Title}"
+                        Style="{StaticResource TopVideoTextStyle}"/>
+                </Grid>
+            </pancakeview:PancakeView>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

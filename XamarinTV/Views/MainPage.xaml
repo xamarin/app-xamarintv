@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns:local="clr-namespace:XamarinTV.Views"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:dualScreen="clr-namespace:Xamarin.Forms.DualScreen;assembly=Xamarin.Forms.DualScreen"
+    mc:Ignorable="d"
+    x:Class="XamarinTV.Views.MainPage"
+    Visual="Material">
+    <!--Xamarin.Forms TwoPaneView that sizes and positions content in
+        the available space, either side-by-side or top-bottom-->
+    <dualScreen:TwoPaneView
+        x:Name="twoPaneView"
+        Pane1Length="{Binding Pane1Length}"
+        Pane2Length="{Binding Pane2Length}"
+        MinTallModeHeight="{Binding MinTallModeHeight}"
+        MinWideModeWidth="{Binding MinWideModeWidth}"        
+        Mode="{Binding TwoPaneViewMode, Mode=OneWayToSource}"
+        TallModeConfiguration="{Binding TallModeConfiguration}"
+        WideModeConfiguration="{Binding WideModeConfiguration}">
+        <!--Pane 1-->
+        <dualScreen:TwoPaneView.Pane1>
+            <local:AnimationView
+                ViewToAnimateIn="{Binding Pane1, Converter={StaticResource ViewModelToViewConverter}}"></local:AnimationView>
+        </dualScreen:TwoPaneView.Pane1>
+        <!--Pane 2-->
+        <dualScreen:TwoPaneView.Pane2>
+            <local:AnimationView
+                ViewToAnimateIn="{Binding Pane2, Converter={StaticResource ViewModelToViewConverter}}"></local:AnimationView>
+        </dualScreen:TwoPaneView.Pane2>
+    </dualScreen:TwoPaneView>
+</ContentPage>

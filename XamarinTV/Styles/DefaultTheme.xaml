@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ResourceDictionary
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:XamarinTV.Converters"
+    xmlns:fonts="clr-namespace:XamarinTV"
+    x:Class="XamarinTV.Styles.DefaultTheme">
+
+    <!-- COLORS -->
+    <Color x:Key="BlackColor">#150303</Color>
+    <Color x:Key="WhiteColor">#f8f8ff</Color>
+
+    <!-- CONVERTERS -->
+    <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
+    <converters:VideoSourceConverter x:Key="VideoSourceConverter" />
+    <converters:ViewModelToViewConverter x:Key="ViewModelToViewConverter" />
+
+    <!-- FONTS -->
+    <OnPlatform x:Key="PoppinsBold" x:TypeArguments="x:String">
+        <On Platform="Android" Value="Poppins-Bold.ttf#Poppins" />
+        <On Platform="UWP" Value="/Assets/Poppins-Bold.ttf#Poppins" />
+    </OnPlatform>
+
+    <OnPlatform x:Key="PoppinsLight"
+                x:TypeArguments="x:String" >
+        <On Platform="Android" Value="Poppins-Light.ttf#Poppins" />
+        <On Platform="UWP" Value="/Assets/Poppins-Light.ttf#Poppins" />
+    </OnPlatform>
+
+    <OnPlatform x:Key="PoppinsMedium"
+                x:TypeArguments="x:String">
+        <On Platform="Android" Value="Poppins-Medium.ttf#Poppins" />
+        <On Platform="UWP" Value="/Assets/Poppins-Medium.ttf#Poppins" />
+    </OnPlatform>
+
+    <OnPlatform x:Key="PoppinsRegular"
+                x:TypeArguments="x:String">
+        <On Platform="Android" Value="Poppins-Regular.ttf#Poppins" />
+        <On Platform="UWP" Value="/Assets/Poppins-Regular.ttf#Poppins" />
+    </OnPlatform>
+
+    <OnPlatform x:Key="PoppinsSemiBold"
+                x:TypeArguments="x:String">
+        <On Platform="Android" Value="Poppins-SemiBold.ttf#Poppins" />
+        <On Platform="UWP" Value="/Assets/Poppins-SemiBold.ttf#Poppins" />
+    </OnPlatform>
+
+    <OnPlatform x:Key="FontAwesome"
+                x:TypeArguments="x:String">
+        <On Platform="Android" Value="fa-solid-900.ttf#Font Awesome 5 Free" />
+        <On Platform="UWP" Value="/Assets/fa-solid-900.ttf#Font Awesome 5 Free" />
+    </OnPlatform>
+
+    <OnPlatform x:Key="Fabric"
+                x:TypeArguments="x:String">
+        <On Platform="Android" Value="FabMDL2.ttf#Fabric MDL2 Assets" />
+        <On Platform="UWP" Value="/Assets/FabMDL2.ttf#Fabric MDL2 Assets" />
+    </OnPlatform>
+
+    <Color x:Key="ColorTabIcon">Gray</Color>
+    <x:Double x:Key="SizeTabIcon">24</x:Double>
+
+    <!-- FONT ICONS -->
+    <FontImageSource x:Key="IconCog"
+                     FontFamily="{StaticResource FontAwesome}"
+                     Glyph="{x:Static fonts:IconFont.Cog}"
+                     Color="Gray"
+                     Size="16"/>
+
+    <FontImageSource x:Key="IconWindowClose"
+                     FontFamily="{StaticResource Fabric}"
+                     Glyph="&#xE8BB;"
+                     Color="Gray"
+                     Size="{OnPlatform Default=18, UWP=8}"/>
+
+    <FontImageSource x:Key="IconCloseCaption"
+                     FontFamily="{StaticResource Fabric}"
+                     Glyph="&#xEF84;"
+                     Color="Gray"
+                     Size="{OnPlatform Default=24, UWP=10}"/>
+
+    <FontImageSource x:Key="IconHighDefinition"
+                     FontFamily="{StaticResource FontAwesome}"
+                     Glyph="{x:Static fonts:IconFont.Tv}"
+                     Color="Gray"
+                     Size="24"/>
+
+    <FontImageSource x:Key="IconMute"
+                     FontFamily="{StaticResource Fabric}"
+                     Glyph="&#xEA85;"
+                     Color="Gray"
+                     Size="{OnPlatform Default=24, UWP=10}"/>
+
+    <FontImageSource
+                x:Key="PlayIcon"
+                FontFamily="{StaticResource Fabric}"
+                Glyph="{x:Static fonts:FabIconFont.Play}"
+                Size="64"/>
+    <FontImageSource
+                x:Key="PauseIcon"
+                FontFamily="{StaticResource Fabric}"
+                Glyph="{x:Static fonts:FabIconFont.Pause}"
+                Size="64"/>
+
+    <!-- FONT SIZES -->
+    <OnPlatform x:Key="LittleSize" x:TypeArguments="x:Double" iOS="9" Android="9" />
+    <OnPlatform x:Key="MidMediumSize" x:TypeArguments="x:Double" iOS="12" Android="14" />
+    <OnPlatform x:Key="MediumSize" x:TypeArguments="x:Double" iOS="14" Android="16" />
+    <OnPlatform x:Key="LargeSize" x:TypeArguments="x:Double" iOS="16" Android="18"/>
+    <OnPlatform x:Key="LargerSize" x:TypeArguments="x:Double" iOS="18" Android="20" />
+    <OnPlatform x:Key="BigSize" x:TypeArguments="x:Double" iOS="20" Android="24" />
+    <OnPlatform x:Key="ExtraBigSize" x:TypeArguments="x:Double" iOS="24" Android="32" />
+    <OnPlatform x:Key="HugeSize" x:TypeArguments="x:Double" iOS="32" Android="48" />
+
+    <!-- SIZES -->
+    <x:Double x:Key="TopBarHeight">44</x:Double>
+    <x:Double x:Key="TopBarVideoplayerHeight">48</x:Double>
+    <x:Int32 x:Key="DefaultMarginPadding">12</x:Int32>
+
+    <!-- STYLES -->
+    <Style TargetType="ActivityIndicator">
+        <Setter Property="IsRunning" Value="True" />
+        <Setter Property="HeightRequest" Value="60" />
+        <Setter Property="WidthRequest" Value="60" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="VerticalOptions" Value="Center" />
+    </Style>
+
+    <Style TargetType="Frame">
+        <Setter Property="BorderColor" Value="{StaticResource BlackColor}" />
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="Margin" Value="0"></Setter>
+        <Setter Property="Padding" Value="0"></Setter>
+    </Style>
+
+</ResourceDictionary>

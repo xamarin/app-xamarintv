@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pancakeview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:viewmodels="clr-namespace:XamarinTV.ViewModels"
+    x:Class="XamarinTV.Views.Templates.KeepWatchingItemTemplate">
+    <ContentView.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="VideoLayoutStyle" TargetType="pancakeview:PancakeView">
+                <Setter Property="CornerRadius" Value="6" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="WidthRequest" Value="150" />
+                <Setter Property="Margin" Value="0, 0, 12, 0" />
+            </Style>
+
+            <Style x:Key="VideoImageStyle" TargetType="Image">
+                <Setter Property="Aspect" Value="AspectFill" />
+            </Style>
+            
+            <Style x:Key="VideoTitleStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource PoppinsLight}" />
+                <Setter Property="FontSize" Value="{StaticResource LittleSize}" />
+                <Setter Property="TextColor" Value="{DynamicResource TextPrimaryColor}" />
+                <Setter Property="LineBreakMode" Value="TailTruncation" />
+                <Setter Property="MaxLines" Value="2" />
+                <Setter Property="WidthRequest" Value="150" />
+                <Setter Property="Margin" Value="6, 0" />
+            </Style>
+
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="48" />
+            </Grid.RowDefinitions>
+            <pancakeview:PancakeView
+                Style="{StaticResource VideoLayoutStyle}">
+                <Grid>
+                    <Image
+                        Source="{Binding Video.Image}"
+                        Style="{StaticResource VideoImageStyle}"/>
+                    <Grid>
+                        <pancakeview:PancakeView
+                            BorderColor="White"
+                            BorderThickness="1"
+                            BackgroundColor="White"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="End"
+                            HeightRequest="6"
+                            CornerRadius="0, 0, 6, 6"/>
+                        <pancakeview:PancakeView
+                            BorderColor="Red"
+                            BorderThickness="1"
+                            BackgroundColor="Red"
+                            HorizontalOptions="Start"
+                            VerticalOptions="End"
+                            HeightRequest="6"
+                            WidthRequest="{Binding Viewed}"
+                            CornerRadius="0, 0, 6, 6"/>
+                    </Grid>
+                    <Grid
+                        BackgroundColor="{StaticResource BlackColor}"
+                        Opacity="0.25"/>
+                    <Image
+                        Source="play"
+                        HeightRequest="48"
+                        WidthRequest="48"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"/>
+                </Grid>
+            </pancakeview:PancakeView>
+            <Label
+                Grid.Row="1"
+                Text="{Binding Video.Title}"
+                Style="{StaticResource VideoTitleStyle}"/>
+        </Grid>
+    </ContentView.Content>
+    <ContentView.GestureRecognizers>
+        <TapGestureRecognizer
+            NumberOfTapsRequired="1"
+            Command="{Binding Source={x:Static viewmodels:MainViewModel.Instance}, Path=PlayVideoCommand}" 
+            CommandParameter="{Binding .}">
+        </TapGestureRecognizer>
+    </ContentView.GestureRecognizers>
+</ContentView>

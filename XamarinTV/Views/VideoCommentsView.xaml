@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:XamarinTV.ViewModels"
+    xmlns:templates="clr-namespace:XamarinTV.Views.Templates"
+    x:Class="XamarinTV.Views.VideoCommentsView">
+    <ContentView.BindingContext>
+        <viewmodels:VideoCommentsViewModel />
+    </ContentView.BindingContext>
+      <ContentView.Content>
+          <Grid Margin="12">
+              <CollectionView
+                  IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}"
+                  ItemsSource="{Binding Comments}">
+                  <CollectionView.ItemsLayout>
+                      <GridItemsLayout
+                          Orientation="Vertical"
+                          VerticalItemSpacing="6"/>
+                  </CollectionView.ItemsLayout>
+                  <CollectionView.ItemTemplate>
+                      <DataTemplate>
+                          <templates:CommentItemTemplate />
+                      </DataTemplate>
+                  </CollectionView.ItemTemplate>
+              </CollectionView>
+              <ActivityIndicator
+                  Color="{DynamicResource TextPrimaryColor}"
+                  IsVisible="{Binding IsBusy}"/>
+          </Grid>
+    </ContentView.Content>
+</ContentView>

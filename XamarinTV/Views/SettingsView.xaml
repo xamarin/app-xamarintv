@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:XamarinTV.ViewModels"
+    xmlns:pancakeview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    x:Class="XamarinTV.Views.SettingsView"
+    BackgroundColor="{DynamicResource BackgroundColor}">
+    <ContentView.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="HeaderStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource PoppinsMedium}"/>
+                <Setter Property="TextColor" Value="{DynamicResource TextPrimaryColor}" />
+                <Setter Property="Margin" Value="12, 12, 12, 0" />
+            </Style>
+
+               <Style x:Key="SecondaryTextStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource PoppinsMedium}"/>
+                <Setter Property="FontSize" Value="{StaticResource LittleSize}"/>
+                <Setter Property="TextColor" Value="{DynamicResource TextSecondaryColor}" />
+                <Setter Property="Margin" Value="12, 12, 12, 0" />
+            </Style>
+
+             <Style x:Key="ChooseThemeSelectorStyle" TargetType="pancakeview:PancakeView">
+                <Setter Property="CornerRadius" Value="8"/>
+                 <Setter Property="Elevation" Value="2"/>
+                 <Setter Property="HasShadow" Value="True" />
+                 <Setter Property="IsClippedToBounds" Value="True" />
+                 <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                 <Setter Property="VerticalOptions" Value="Start" />
+            </Style>
+
+            <Style x:Key="SelectedThemeStyle" TargetType="BoxView">
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="VerticalOptions" Value="Start" />
+                <Setter Property="HeightRequest" Value="12" />
+                <Setter Property="WidthRequest" Value="12" />
+                <Setter Property="CornerRadius" Value="24" />
+                <Setter Property="Margin" Value="6" />
+            </Style>
+
+            <Style x:Key="ThemeNameStyle" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="TextColor" Value="{DynamicResource TextSecondaryColor}" />
+            </Style>
+
+            <Style x:Key="DescriptionTextStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource PoppinsLight}"/>
+                <Setter Property="TextColor" Value="{DynamicResource TextSecondaryColor}" />
+                <Setter Property="Margin" Value="12, 0" />
+            </Style>
+
+            <Style x:Key="SettingsButtonStyle" TargetType="Button">
+                <Setter Property="FontFamily" Value="{StaticResource PoppinsMedium}"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="BorderColor" Value="{DynamicResource TextPrimaryColor}"/>
+                <Setter Property="TextColor" Value="{DynamicResource TextPrimaryColor}" />
+                <Setter Property="BorderRadius" Value="24"/>
+                <Setter Property="BorderWidth" Value="1"/>
+                <Setter Property="CornerRadius" Value="24"/>
+                <Setter Property="HeightRequest" Value="48"/>
+                <Setter Property="Margin" Value="112, 12"/>
+            </Style>
+
+            <Style x:Key="LinkButtonStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{DynamicResource TextPrimaryColor}" />
+                <Setter Property="FontFamily" Value="{StaticResource PoppinsRegular}"/>
+                <Setter Property="TextDecorations" Value="Underline"/>
+                <Setter Property="Margin" Value="12, 0"/>
+            </Style>
+
+            <Style x:Key="CloseStyle" TargetType="ImageButton">
+                <Setter Property="HorizontalOptions" Value="End" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="Margin" Value="12, 0" />
+            </Style>
+
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.BindingContext>
+        <viewmodels:SettingsViewModel />
+    </ContentView.BindingContext>
+    <ScrollView>
+        <StackLayout>
+            <!-- THEMES -->
+            <StackLayout>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Label
+                        Grid.Column="0"
+                        Text="Theming"
+                        HorizontalOptions="FillAndExpand"
+                        FontAttributes="Bold"
+                        Style="{StaticResource HeaderStyle}" />
+                    <ImageButton
+                        Command="{Binding CloseCommand}"
+                        Grid.Column="1"
+                        BackgroundColor="Transparent"
+                        Source="{StaticResource IconWindowClose}"
+                        Style="{StaticResource CloseStyle}">
+                    </ImageButton>
+                </Grid>
+                <Grid
+                    Margin="16, 0"
+                    RowSpacing="16"
+                    ColumnSpacing="16">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="3*" />
+                    </Grid.ColumnDefinitions>
+                    <pancakeview:PancakeView
+                            Grid.Column="0"
+                            Style="{StaticResource ChooseThemeSelectorStyle}">
+                        <pancakeview:PancakeView.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding ThemeDarkCommand}"/>
+                        </pancakeview:PancakeView.GestureRecognizers>
+                        <Grid>
+                            <Image
+                                Aspect="AspectFill"
+                                Source="darktheme.png" />
+                            <BoxView
+                                IsVisible="{Binding IsDarkMode}"
+                                Color="{StaticResource WhiteColor}"
+                                Style="{StaticResource SelectedThemeStyle}"/>
+                        </Grid>
+                    </pancakeview:PancakeView>
+                    <Label
+                        Grid.Row="1"
+                        Text="Dark"
+                        Style="{StaticResource ThemeNameStyle}"/>
+                    <pancakeview:PancakeView
+                            Grid.Column="1"
+                            Style="{StaticResource ChooseThemeSelectorStyle}">
+                        <pancakeview:PancakeView.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding ThemeLigthCommand}"/>
+                        </pancakeview:PancakeView.GestureRecognizers>
+                        <Grid>
+                            <Image
+                                Aspect="AspectFill"
+                                Source="lighttheme.png" />
+                            <BoxView
+                                IsVisible="{Binding IsDarkMode, Converter={StaticResource InverseBoolConverter}}"
+                                Color="{StaticResource BlackColor}"
+                                Style="{StaticResource SelectedThemeStyle}"/>
+                        </Grid>
+                    </pancakeview:PancakeView>
+                    <Label
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        Text="Light"
+                        Style="{StaticResource ThemeNameStyle}"/>
+                </Grid>
+            </StackLayout>
+            <!-- OTHER SETTINGS -->
+            <Label
+                Text="More information"
+                HorizontalOptions="FillAndExpand"
+                FontAttributes="Bold"
+                Style="{StaticResource HeaderStyle}" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Label
+                    Grid.Row="0" 
+                    Text="This app showcases the possibilities of Xamarin to develop apps for Surface Duo. This app is available as open source project on GitHub."
+                    Style="{StaticResource DescriptionTextStyle}"/>
+                <Button
+                    Grid.Row="1"
+                    Visual="Material"
+                    Text="Visit GitHub"
+                    Style="{StaticResource SettingsButtonStyle}"
+                    Command="{Binding ViewCodeCommand}"/>
+                <Label
+                    Grid.Row="2" 
+                    Text="This app uses some amazing Xamarin Open Source projects."
+                    Style="{StaticResource DescriptionTextStyle}"/>
+                <StackLayout
+                    Grid.Row="3">
+                    <Label
+                        Text="Used OpenSource Components"
+                        Style="{StaticResource SecondaryTextStyle}" />
+                    <StackLayout
+                        BindableLayout.ItemsSource="{Binding OpenSourceList}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout>
+                                    <Label
+                                        Text="{Binding Title}"
+                                        Style="{StaticResource LinkButtonStyle}">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:SettingsViewModel}}, Path=OpenGitHubCommand}"
+                                                CommandParameter="{Binding Url}"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </StackLayout>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </ScrollView>
+</ContentView>
