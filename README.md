@@ -11,7 +11,7 @@ urlFragment: "update-this-to-unique-url-stub"
 # Official Microsoft Sample
 
 Welcome to the dual-screen capable Xamarin TV app
-![xamarin TV demo on a surface neo device](images/xamarintv-neo.png)
+![xamarin TV demo on a surface neo device](images/xamarintv.png)
 
 ## Setup
 
