@@ -5,10 +5,9 @@ languages:
 products:
 - dotnet
 description: "Full featured Xamarin.Forms app demonstrating the dual-screen device capability for neo and duo devices"
-urlFragment: "update-this-to-unique-url-stub"
 ---
 
-# Official Microsoft Sample
+# Welcome to Xamarin TV
 
 Welcome to the dual-screen capable Xamarin TV app
 ![xamarin TV demo on a surface neo device](images/xamarintv.png)
