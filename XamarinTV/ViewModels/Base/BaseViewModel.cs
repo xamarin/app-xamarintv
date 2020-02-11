@@ -85,5 +85,10 @@ namespace XamarinTV.ViewModels.Base
         public virtual void OnFirstAppearing()
         {
         }
+
+        public virtual bool OnBackButtonPressed()
+        {
+            return false;
+        }
     }
 }

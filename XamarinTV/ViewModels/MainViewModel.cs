@@ -172,6 +172,17 @@ namespace XamarinTV.ViewModels
             UpdateLayouts();
         }
 
+        public override bool OnBackButtonPressed()
+        {
+            if (VideoPlayerViewModel.Video != null)
+            {
+                OnClosePlayingVideo(null);
+                return true;
+            }
+
+            return base.OnBackButtonPressed();
+        }
+
         void OnPlayVideo(Video video)
         {
             VideoPlayerViewModel.Video = video;

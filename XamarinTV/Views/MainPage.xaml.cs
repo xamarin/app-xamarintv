@@ -40,6 +40,9 @@ namespace XamarinTV.Views
             ((BaseViewModel)BindingContext).OnDisappearing();
         }
 
-        
+        protected override bool OnBackButtonPressed()
+        {
+            return ((BaseViewModel)BindingContext).OnBackButtonPressed();
+        }
     }
 }
