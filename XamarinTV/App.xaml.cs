@@ -11,6 +11,8 @@ namespace XamarinTV
         static MainPage _mainPage;
         public App()
         {
+            Xamarin.Forms.Device.SetFlags(new List<string>() { "StateTriggers_Experimental", "IndicatorView_Experimental", "CarouselView_Experimental", "MediaElement_Experimental" });
+
             InitializeComponent();
 
             if (_mainPage != null)
@@ -23,7 +25,6 @@ namespace XamarinTV
             _mainPage = new MainPage();
             MainPage = _mainPage;
 
-            Xamarin.Forms.Device.SetFlags(new List<string>() { "StateTriggers_Experimental", "IndicatorView_Experimental", "CarouselView_Experimental", "MediaElement_Experimental" });
 
             On<Windows>().SetImageDirectory("Assets");
         }
