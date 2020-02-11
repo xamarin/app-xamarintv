@@ -8,10 +8,12 @@ namespace XamarinTV.ViewModels
     {
         Video _video;
         double _volume;
+        bool _isPlaying;
 
         public VideoPlayerViewModel()
         {
             Volume = 0.2d;
+            IsPlaying = true;
         }
 
         public Video Video
@@ -19,7 +21,7 @@ namespace XamarinTV.ViewModels
             get { return _video; }
             set
             {
-                if(SetProperty(ref _video, value))
+                if (SetProperty(ref _video, value))
                 {
                     OnPropertyChanged(nameof(VideoSource));
                 }
@@ -44,6 +46,15 @@ namespace XamarinTV.ViewModels
                     return null;
 
                 return "video.mp4";
+            }
+        }
+
+        public bool IsPlaying
+        {
+            get => _isPlaying;
+            set
+            {
+                SetProperty(ref _isPlaying, value);
             }
         }
 
