@@ -27,7 +27,6 @@ namespace XamarinTV.Droid
             base.OnCreate(savedInstanceState);
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            Forms.SetFlags("IndicatorView_Experimental", "CarouselView_Experimental", "MediaElement_Experimental");
             Forms.Init(this, savedInstanceState); 
             CachedImageRenderer.Init(true);
             SharpnadoInitializer.Initialize();

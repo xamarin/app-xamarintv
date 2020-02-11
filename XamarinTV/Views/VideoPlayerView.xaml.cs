@@ -44,11 +44,25 @@ namespace XamarinTV.Views
             }
         }
 
+        bool IsLandscape
+        {
+            get
+            {
+                if (DualScreenInfo.Current.SpanMode == TwoPaneViewMode.SinglePane &&
+                    DualScreenInfo.Current.HingeBounds == Rectangle.Zero)
+                    return Device.info.CurrentOrientation == Xamarin.Forms.Internals.DeviceOrientation.Landscape ||
+                        Device.info.CurrentOrientation == Xamarin.Forms.Internals.DeviceOrientation.LandscapeRight ||
+                        Device.info.CurrentOrientation == Xamarin.Forms.Internals.DeviceOrientation.LandscapeLeft;
+
+                return DualScreenInfo.Current.IsLandscape;
+            }
+        }
+
         void UpdateAspectRatio()
         {
             Device.BeginInvokeOnMainThread(() =>
             {
-                if (DualScreenInfo.Current.IsLandscape)
+                if (IsLandscape)
                 {
                     VideoPlayer.Aspect = Aspect.AspectFill;
                     VideoPlayer.HeightRequest = -1;

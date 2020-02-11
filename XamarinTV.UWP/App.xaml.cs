@@ -39,7 +39,6 @@ namespace XamarinTV.UWP
                 rootFrame = new Frame();
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
-                Xamarin.Forms.Forms.SetFlags("IndicatorView_Experimental", "CarouselView_Experimental", "MediaElement_Experimental");
                 Xamarin.Forms.Forms.Init(e); // requires the `e` parameter
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
