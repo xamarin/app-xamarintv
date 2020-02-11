@@ -13,7 +13,7 @@ namespace XamarinTV.ViewModels
         public VideoPlayerViewModel()
         {
             Volume = 0.2d;
-            IsPlaying = true;
+            IsPlaying = true;   // AutoPlay
         }
 
         public Video Video
