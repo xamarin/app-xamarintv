@@ -69,6 +69,7 @@
                 Grid.Row="0"
                 TranslationY="0"
                 Scrolled="OnScrolled"
+                IndicatorView="TopVideosIndicator"
                 ItemsSource="{Binding TopVideos}"
                 CurrentItem="{Binding Current, Mode=TwoWay}">
                 <CarouselView.ItemsLayout>
@@ -86,7 +87,6 @@
             <IndicatorView
                 x:Name="TopVideosIndicator"
                 Grid.Row="1"
-                ItemsSourceBy="TopVideosCarousel"
                 Style="{StaticResource TopVideosIndicatorStyle}"/>
         </Grid>
     </ContentView.Content>
