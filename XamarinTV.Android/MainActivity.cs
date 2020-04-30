@@ -5,7 +5,6 @@ using Android.OS;
 using Xamarin.Forms;
 using FFImageLoading.Forms.Platform;
 using Xamarin.Forms.DualScreen;
-using Sharpnado.Presentation.Forms.Droid;
 
 namespace XamarinTV.Droid
 {
@@ -29,9 +28,7 @@ namespace XamarinTV.Droid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             Forms.Init(this, savedInstanceState); 
             CachedImageRenderer.Init(true);
-            SharpnadoInitializer.Initialize();
             LoadApplication(new App());
-            
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)

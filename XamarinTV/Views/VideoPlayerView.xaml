@@ -145,13 +145,14 @@
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                     </ImageButton>
-                    <Label x:Name="TimeAndDuration" Text="Loading..."
-                       TextColor="White" 
-                       FontSize="14"
-                       Margin="15"
-                       VerticalOptions="End"
-                       HorizontalOptions="End"/>
-
+                    <Label
+                        x:Name="TimeAndDuration"
+                        Text="Loading..."
+                        TextColor="White" 
+                        FontSize="14"
+                        Margin="15"
+                        VerticalOptions="End"
+                        HorizontalOptions="End"/>
                     <Label
                         Text="{Binding Video.Title}"
                         Style="{StaticResource TitleStyle}" />

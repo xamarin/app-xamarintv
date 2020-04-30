@@ -2,18 +2,23 @@
 <ContentView
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
-    xmlns:tabs="clr-namespace:Sharpnado.Presentation.Forms.CustomViews.Tabs;assembly=Sharpnado.Presentation.Forms"
     xmlns:views="clr-namespace:XamarinTV.Views"
+    xmlns:tabs="clr-namespace:Xamarin.Forms.TabView;assembly=Xamarin.Forms.TabView"
     x:Class="XamarinTV.Views.BrowseVideosView"
     BackgroundColor="{DynamicResource BackgroundColor}">
     <ContentView.Resources>
         <ResourceDictionary>
 
-            <Style TargetType="tabs:UnderlinedTabItem">
+            <Style TargetType="tabs:TabView">
+                <Setter Property="IsTabTransitionEnabled" Value="True" />
+                <Setter Property="TabIndicatorColor" Value="{DynamicResource WhiteColor}" />
+                <Setter Property="TabStripPlacement" Value="Top" />
+            </Style>
+
+            <Style TargetType="tabs:TabViewItem">
                 <Setter Property="FontFamily" Value="{StaticResource PoppinsSemiBold}" />
-                <Setter Property="UnselectedLabelColor" Value="LightGray" />
-                <Setter Property="SelectedTabColor" Value="{StaticResource WhiteColor}" />
-                <Setter Property="UnderlineAllTab" Value="True" />
+                <Setter Property="TextColor" Value="LightGray" />
+                <Setter Property="TextColorSelected" Value="{StaticResource WhiteColor}" />
                 <Setter Property="Margin" Value="12, 0" />
             </Style>
 
@@ -50,21 +55,6 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <tabs:TabHostView
-                    Grid.Column="0"
-                    BackgroundColor="{StaticResource BlackColor}"
-                    ShadowType="Bottom"
-                    TabType="Scrollable"
-                    SelectedIndex="{Binding Source={x:Reference Switcher}, Path=SelectedIndex, Mode=TwoWay}">
-                    <tabs:TabHostView.Tabs>
-                        <tabs:UnderlinedTabItem
-                            Label="Featured"/>
-                        <tabs:UnderlinedTabItem
-                            Label="Keep Watching"/>
-                        <tabs:UnderlinedTabItem
-                            Label="Trending"/>
-                    </tabs:TabHostView.Tabs>
-                </tabs:TabHostView>
                 <ImageButton
                     Grid.Column="1"
                     Command="{Binding SettingsCommand}"
@@ -92,15 +82,22 @@
                     </Image.GestureRecognizers>
                 </Image>
             </Grid>
-            <tabs:ViewSwitcher
+            <tabs:TabView
                 Grid.Row="2"
-                x:Name="Switcher"
-                Animate="True"
-                SelectedIndex="{Binding SelectedViewModelIndex, Mode=TwoWay}">
-                <views:FeaturedVideosView />
-                <views:KeepWatchingView />
-                <views:TrendingView />
-            </tabs:ViewSwitcher>
+                BackgroundColor="{StaticResource BlackColor}">
+                <tabs:TabViewItem
+                    Text="Featured">
+                    <views:FeaturedVideosView />
+                </tabs:TabViewItem>
+                <tabs:TabViewItem
+                    Text="Keep Watching">
+                    <views:KeepWatchingView />
+                </tabs:TabViewItem>
+                <tabs:TabViewItem
+                    Text="Trending">
+                    <views:TrendingView />
+                </tabs:TabViewItem>
+            </tabs:TabView>
         </Grid>
     </ContentView.Content>
 </ContentView>

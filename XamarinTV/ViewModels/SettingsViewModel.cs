@@ -69,8 +69,8 @@ namespace XamarinTV.ViewModels
                 new OpenSource { Title = "Xamarin.Essentials", Url = "https://github.com/xamarin/Essentials" },
                 new OpenSource { Title = "FFImageLoading", Url = "https://github.com/luberda-molinet/FFImageLoading" },
                 new OpenSource { Title = "PancakeView", Url = "https://github.com/sthewissen/Xamarin.Forms.PancakeView" },
-                new OpenSource { Title = "Sharpnado", Url = "https://github.com/roubachof/Sharpnado.Presentation.Forms" },
                 new OpenSource { Title = "StateSquid", Url = "https://github.com/sthewissen/Xamarin.Forms.StateSquid" },
+                new OpenSource { Title = "Xamarin.Forms.TabView", Url = "https://github.com/jsuarezruiz/Xamarin.Forms.TabView" },
                 new OpenSource { Title = "Xamanimation", Url = "https://github.com/jsuarezruiz/Xamanimation" },
             };
         }
