@@ -1,10 +1,7 @@
 ﻿using FFImageLoading.Forms.Platform;
-using XamarinTV.ViewModels;
-using System.Threading.Tasks;
 using Windows.Foundation.Metadata;
 using Windows.UI;
 using Windows.UI.ViewManagement;
-using Windows.UI.Xaml;
 
 namespace XamarinTV.UWP
 {
