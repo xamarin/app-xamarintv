@@ -29,10 +29,10 @@ namespace XamarinTV.ViewModels
 
         TwoPaneViewMode _twoPaneViewMode;
         bool _settingsActive = false;
-        private bool spannedWithVideo;
-        private bool notSpannedWithVideo;
-        private bool spannedWithoutVideo;
-        private bool notSpannedWithoutVideo;
+        bool _spannedWithVideo;
+        bool _notSpannedWithVideo;
+        bool _spannedWithoutVideo;
+        bool _notSpannedWithoutVideo;
 
         public Command<Video> PlayVideoCommand { get; }
         public Command OpenSettingWindowCommand { get; }
@@ -90,10 +90,10 @@ namespace XamarinTV.ViewModels
 
         public bool DeviceIsSpanned => DualScreenInfo.Current.SpanMode != TwoPaneViewMode.SinglePane;
 
-        public bool SpannedWithVideo { get => spannedWithVideo; set => SetProperty(ref spannedWithVideo, value); }
-        public bool NotSpannedWithVideo { get => notSpannedWithVideo; set => SetProperty(ref notSpannedWithVideo, value); }
-        public bool SpannedWithoutVideo { get => spannedWithoutVideo; set => SetProperty(ref spannedWithoutVideo, value); }
-        public bool NotSpannedWithoutVideo { get => notSpannedWithoutVideo; set => SetProperty(ref notSpannedWithoutVideo, value); }
+        public bool SpannedWithVideo { get => _spannedWithVideo; set => SetProperty(ref _spannedWithVideo, value); }
+        public bool NotSpannedWithVideo { get => _notSpannedWithVideo; set => SetProperty(ref _notSpannedWithVideo, value); }
+        public bool SpannedWithoutVideo { get => _spannedWithoutVideo; set => SetProperty(ref _spannedWithoutVideo, value); }
+        public bool NotSpannedWithoutVideo { get => _notSpannedWithoutVideo; set => SetProperty(ref _notSpannedWithoutVideo, value); }
 
         public void UpdateLayouts()
         {

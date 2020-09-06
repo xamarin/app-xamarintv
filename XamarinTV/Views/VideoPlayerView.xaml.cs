@@ -4,13 +4,14 @@ using System.Threading.Tasks;
 using System.Timers;
 using Xamarin.Forms;
 using Xamarin.Forms.DualScreen;
+using XamarinTV.ViewModels;
 
 namespace XamarinTV.Views
 {
     public partial class VideoPlayerView : ContentView
     {
-        Timer _inactivityTimer;
-        Timer _playbackTimer;
+        readonly Timer _inactivityTimer;
+        readonly Timer _playbackTimer;
 
         public VideoPlayerView()
         {
@@ -87,12 +88,12 @@ namespace XamarinTV.Views
             UpdateAspectRatio();
         }
 
-        private void OnPlaybackTimerElapsed(object sender, ElapsedEventArgs e)
+        void OnPlaybackTimerElapsed(object sender, ElapsedEventArgs e)
         {
-            this.UpdateTimeDisplay();
+            UpdateTimeDisplay();
         }
 
-        private async void OnInactivityTimerElapsed(object sender, ElapsedEventArgs e)
+        async void OnInactivityTimerElapsed(object sender, ElapsedEventArgs e)
         {
             await Task.WhenAny<bool>
             (
@@ -105,12 +106,9 @@ namespace XamarinTV.Views
                 _inactivityTimer.Start();
         }
 
-        private void MediaElement_StateRequested(object sender, StateRequested e)
+        void MediaElement_StateRequested(object sender, StateRequested e)
         {
-            VisualStateManager.GoToState(PlayPauseToggle,
-                (e.State == MediaElementState.Playing)
-                ? "playing"
-                : "paused");
+            ((VideoPlayerViewModel)BindingContext).IsPlaying = e.State == MediaElementState.Playing;
 
             if (e.State == MediaElementState.Playing)
             {
